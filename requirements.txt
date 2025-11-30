@@ -1,0 +1,4 @@
+# ESP32 DOOM Player Requirements
+pygame>=2.0.0
+pyserial>=3.5
+requests>=2.25.0

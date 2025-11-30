@@ -1,0 +1,35 @@
+# Build directories
+build/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ESP-IDF
+sdkconfig.old
+dependencies.lock
+
+# Python
+*.egg-info/
+dist/
+venv/
+.env
+
+# WAD files (large, user should provide their own)
+# Keep DOOM1.WAD (shareware) but ignore full game WADs
+data/*.WAD
+!data/DOOM1.WAD
+!data/DOOM1_FREEDOOM.WAD
+!data/DOOM1_MINI.WAD
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

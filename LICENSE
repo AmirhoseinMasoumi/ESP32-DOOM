@@ -1,0 +1,59 @@
+# License
+
+This project combines code under multiple compatible open-source licenses:
+
+## GPL v2 (GNU General Public License v2)
+- **prboom/** - PrBoom engine source code
+- **prboom-esp32-compat/** - ESP32 platform layer and DOOM integration
+- **prboom-wad-tables/** - WAD data tables
+- All modifications and derivatives of the above
+
+Covers the original DOOM source code released by id Software under GPL v2, and all subsequent derivative works (Boom, PrBoom, etc.)
+
+Full text: See `prboom/COPYING`
+
+## Apache License 2.0
+- **prboom-esp32-compat/spi_lcd.c** - SPI LCD driver (based on Espressif template)
+- **prboom-esp32-compat/psxcontroller.c** - PSX controller driver (Espressif)
+
+These are permissive hardware driver implementations that are compatible with GPL v2.
+
+Full text: http://www.apache.org/licenses/LICENSE-2.0
+
+## Original Code (This Project)
+- **doom_player.py** - Python player client for keyboard input and streaming
+- **make.ps1**, **upload_wad.ps1** - Build and deployment scripts
+- **doom_stream.c** modifications - WiFi streaming implementation
+- **prboom_main.c** modifications - ESP32 entry point
+
+This original code is released under **GPL v2** to maintain compatibility with the DOOM engine.
+
+## Data Files
+- **data/DOOM1.WAD** - Shareware DOOM (distributable)
+- **data/DOOM1_FREEDOOM.WAD** - FreeDOOM (GPL-compatible)
+- **data/DOOM1_MINI.WAD** - Custom test WAD (original)
+
+## Why These Licenses Work Together
+
+GPL v2 is compatible with Apache 2.0 when:
+1. Apache code is used as-is or minimally modified
+2. The combined work is distributed under GPL v2
+3. All license terms are preserved and disclosed
+
+This project follows this model, with hardware drivers wrapping the GPL game engine.
+
+## Summary
+
+**You are free to:**
+- Use this code for any purpose
+- Modify and distribute it
+- Run it on any hardware
+- Build commercial products with it (under GPL v2 terms)
+
+**You must:**
+- Include the original licenses (included in this repo)
+- Preserve copyright notices
+- Share modifications under compatible licenses
+- Provide source code access
+
+For questions about licensing, see the GPL v2 section 1-7 in `prboom/COPYING`.
