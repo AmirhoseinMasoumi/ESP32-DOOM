@@ -8,7 +8,13 @@ A port of PrBoom (Doom engine) to the ESP32-WROVER module with external PSRAM. P
 
 ## Demo
 
-<img src="assets/demp.gif" alt="ESP32-DOOM demo" width="480" />
+**On-device capture (SPI LCD):**
+
+<img src="assets/demp.gif" alt="ESP32-DOOM on-device demo" width="480" />
+
+**Web streaming preview (browser):**
+
+<img src="assets/web-demo.gif" alt="ESP32-DOOM web preview" width="640" />
 
 ## Features
 
