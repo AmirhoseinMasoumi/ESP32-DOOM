@@ -58,7 +58,7 @@
 // After rotation: width=280, height=240
 #define LCD_WIDTH   280
 #define LCD_HEIGHT  240
-#define LCD_OFFSET_X 0
+#define LCD_OFFSET_X 20
 #define LCD_OFFSET_Y 0
 #else
 #define LCD_WIDTH   320
