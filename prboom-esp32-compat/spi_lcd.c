@@ -316,7 +316,8 @@ SemaphoreHandle_t dispDoneSem = NULL;
 #define NO_SIM_TRANS 5 //Amount of SPI transfers to queue in parallel
 #define MEM_PER_TRANS LCD_WIDTH*2 //in 16-bit words
 
-// DOOM renders at 320x200, we need to fit it into LCD_WIDTH x LCD_HEIGHT
+// DOOM renders at 320x200, we need to fit it into LCD_WIDTH x LCD_HEIGHT.
+// SCALED_WIDTH/SCALED_HEIGHT define the scaled output region (<= LCD size).
 // For ST7789 280x240 (landscape): use full display area
 #define DOOM_WIDTH 320
 #define DOOM_HEIGHT 200
@@ -392,27 +393,31 @@ void IRAM_ATTR displayTask(void *arg) {
 #endif
 
 #if (CONFIG_HW_LCD_TYPE == 1)
-		// ST7789 280x240: Scale 320x200 to full 280x240
-		send_header_start(spi, LCD_OFFSET_X, LCD_OFFSET_Y, LCD_WIDTH, LCD_HEIGHT);
+		// ST7789 280x240: Scale 320x200 into SCALED_WIDTH x SCALED_HEIGHT
+		const int scaledWidth = SCALED_WIDTH;
+		const int scaledHeight = SCALED_HEIGHT;
+		const int scaledX = LCD_OFFSET_X + (LCD_WIDTH - scaledWidth) / 2;
+		const int scaledY = LCD_OFFSET_Y + (LCD_HEIGHT - scaledHeight) / 2 + Y_OFFSET;
+		send_header_start(spi, scaledX, scaledY, scaledWidth, scaledHeight);
 		send_header_cleanup(spi);
 		
 		// Get pointer to frame buffer
 		uint8_t *fbData = (uint8_t*)currFbPtr;
 		
 		// Scaled DOOM content (320x200 -> 280x240)
-		for (int y = 0; y < SCALED_HEIGHT; y++) {
+		for (int y = 0; y < scaledHeight; y++) {
 			// Map destination Y to source Y
-			int srcY = (y * DOOM_HEIGHT) / SCALED_HEIGHT;
+			int srcY = (y * DOOM_HEIGHT) / scaledHeight;
 			
-			for (i = 0; i < LCD_WIDTH; i++) {
+			for (i = 0; i < scaledWidth; i++) {
 				// Map destination X to source X
-				int srcX = (i * DOOM_WIDTH) / LCD_WIDTH;
+				int srcX = (i * DOOM_WIDTH) / scaledWidth;
 				int srcIdx = srcY * DOOM_WIDTH + srcX;
 				uint8_t pixel = fbData[srcIdx];
 				dmamem[idx][i] = lcdpal[pixel];
 			}
 			
-			trans[idx].length = LCD_WIDTH * 16;
+			trans[idx].length = scaledWidth * 16;
 			trans[idx].user = (void*)1;
 			trans[idx].tx_buffer = dmamem[idx];
 			ret = spi_device_queue_trans(spi, &trans[idx], portMAX_DELAY);
