@@ -6,6 +6,10 @@ A port of PrBoom (Doom engine) to the ESP32-WROVER module with external PSRAM. P
 ![ESP-IDF](https://img.shields.io/badge/ESP--IDF-v5.3-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-GPL%20v2-green?style=for-the-badge)
 
+## Demo
+
+<img src="assets/demp.gif" alt="ESP32-DOOM demo" width="480" />
+
 ## Features
 
 - **Dual Display Modes**:
